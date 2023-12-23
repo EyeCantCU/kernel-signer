@@ -14,9 +14,9 @@ inputs:
     default: 'https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/certs/public_key.der.test'
     required: true
 runs:
-  using: "composite"
-  steps:
-    - name: Sign kernel
-      shell: bash
-      run: |
-        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} --privledged ${{ inputs.image }} "wget -q https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/sign-kernel.sh -P /tmp && /tmp/sign-kernel.sh"
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    IMAGE: ${{ inputs.image }}
+    PRIVKEY: ${{ inputs.privkey }}
+    PUBKEY: ${{ inputs.pubkey }}
