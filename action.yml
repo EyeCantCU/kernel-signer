@@ -1,0 +1,22 @@
+name: 'Kernel Signer'
+author: 'EyeCantCU'
+description: 'Signs kernel in image via Podman'
+inputs:
+  image:
+    description: 'Image containing kernel'
+    required: true
+  privkey:
+    description: 'Private key, path to private key, or URL to retrieve private key'
+    default: 'https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/certs/private_key.priv.test'
+    required: true
+  pubkey:
+    description: 'Public key, path to public key, or URL to retrieve public key'
+    default: 'https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/certs/public_key.der.test'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Sign kernel
+      shell: bash
+      run: |
+        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} --privledged ${{ inputs.image }} "wget -q https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/sign-kernel.sh -P /tmp && /tmp/sign-kernel.sh"
