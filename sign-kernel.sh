@@ -3,8 +3,14 @@
 kernel_version=$(uname -r)
 
 if command -v rpm-ostree; then
-  if grep -qv "kernel-devel" <<< $(rpm -qa); then
-    rpm-ostree install kernel-devel
+  if [[ "${kernel_version}" =~ "surface" ]]; then
+    if grep -qv "kernel-surface-devel" <<< $(rpm -qa); then
+      rpm-ostree install kernel-surface-devel
+    fi
+  else
+    if grep -qv "kernel-devel" <<< $(rpm -qa); then
+      rpm-ostree install kernel-devel
+    fi
   fi
 fi
 
