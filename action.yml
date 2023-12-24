@@ -7,11 +7,11 @@ inputs:
     required: true
   privkey:
     description: 'Private key, path to private key, or URL to retrieve private key'
-    default: 'https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/certs/private_key.priv.test'
+    default: './certs/private_key.priv.test'
     required: true
   pubkey:
     description: 'Public key, path to public key, or URL to retrieve public key'
-    default: 'https://raw.githubusercontent.com/EyeCantCU/kernel-signer/main/certs/public_key.der.test'
+    default: './certs/public_key.der.test'
     required: true
 runs:
   using: "docker"

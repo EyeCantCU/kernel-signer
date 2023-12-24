@@ -14,7 +14,9 @@ if [[ "${PRIVKEY}" == /* ]]; then
 else
   PRIVKEY_PATH="/etc/pki/kernel/private/private_key.priv"
   mkdir -p "$(dirname "$PRIVKEY_PATH")"
-  if [[ "${PRIVKEY}" == http* ]]; then
+  if [[ "${PRIVKEY}" == ./* ]]; then
+    cp "${PRIVKEY}" "${PRIVKEY_PATH}"
+  elif [[ "${PRIVKEY}" == http* ]]; then
     wget -q "${PRIVKEY}" -O "${PRIVKEY_PATH}"
   else
     echo "${PRIVKEY}" > "${PRIVKEY_PATH}"
@@ -27,7 +29,9 @@ if [[ "${PUBKEY}" == /* ]]; then
 else
   PUBKEY_PATH="/etc/pki/kernel/public/public_key.der"
   mkdir -p "$(dirname "$PUBKEY_PATH")"
-  if [[ "${PUBKEY}" == http* ]]; then
+  if [[ "${PUBKEY}" == ./* ]]; then
+    cp "${PUBKEY}" "${PUBKEY_PATH}"
+  elif [[ "${PUBKEY}" == http* ]]; then
     wget -q "${PUBKEY}" -O "${PUBKEY_PATH}"
   else
     echo "${PUBKEY}" > "${PUBKEY_PATH}"
