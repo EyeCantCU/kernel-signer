@@ -17,7 +17,7 @@ else
   if [[ "${PRIVKEY}" == http* ]]; then
     wget -q "${PRIVKEY}" -O "${PRIVKEY_PATH}"
   else
-    echo "${PRIVKEY}" > "${PRIVKEY_PATH}")
+    echo "${PRIVKEY}" > "${PRIVKEY_PATH}"
   fi
 fi
 
@@ -30,7 +30,7 @@ else
   if [[ "${PUBKEY}" == http* ]]; then
     wget -q "${PUBKEY}" -O "${PUBKEY_PATH}"
   else
-    echo "${PUBKEY}" > "${PUBKEY_PATH}")
+    echo "${PUBKEY}" > "${PUBKEY_PATH}"
   fi
 fi
 
@@ -40,5 +40,7 @@ cd /usr/src/kernels/$kernel_version/scripts
 ./sign-file sha256 $PRIVKEY_PATH $PUBKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz-virt.efi
 
 if command -v ostree; then
+  rm -rf /tmp/* /var/*
+  mkdir -p /var/lib/bluetooth
   ostree container commit
 fi
