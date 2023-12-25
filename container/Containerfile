@@ -1,3 +1,0 @@
-FROM quay.io/fedora/fedora-minimal:39 AS podman-minimal
-
-RUN dnf5 install -y podman && dnf5 clean all
