@@ -1,16 +1,18 @@
 #!/usr/bin/bash
 
-kernel_version=$(uname -r)
+kernel_version=""
 
 if command -v rpm-ostree; then
-  if [[ "${kernel_version}" =~ "surface" ]]; then
+  if grep "kernel-surface" <<< $(rpm -qa); then
     if grep -qv "kernel-surface-devel" <<< $(rpm -qa); then
       rpm-ostree install kernel-surface-devel
     fi
+    kernel_version=$(rpm -qa | grep kernel-surface-[0-9] | sed 's/kernel-surface-//')
   else
     if grep -qv "kernel-devel" <<< $(rpm -qa); then
       rpm-ostree install kernel-devel
     fi
+    kernel_version=$(rpm -qa | grep kernel-[0-9] | sed 's/kernel-//')
   fi
 fi
 
