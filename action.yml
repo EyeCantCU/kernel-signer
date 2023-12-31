@@ -20,5 +20,6 @@ runs:
       shell: bash
       run: |
         CONTAINER_ID=$(podman run --replace --name ${{ inputs.image }} -dt ${{ inputs.image }})
-        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} -w $PWD $CONTAINER_ID ./sign-kernel.sh
+        podman cp ./sign-kernel.sh ${{ inputs.image }}:/tmp/sign-kernel.sh
+        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} $CONTAINER_ID /tmp/sign-kernel.sh
         buildah commit $CONTAINER_ID ${{ inputs.image }}
