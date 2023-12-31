@@ -7,11 +7,11 @@ inputs:
     required: true
   privkey:
     description: 'Private key, path to private key, or URL to retrieve private key'
-    default: './certs/private_key.priv.test'
+    default: '/etc/pki/kernel/private/private_key.priv'
     required: true
   pubkey:
     description: 'Public key, path to public key, or URL to retrieve public key'
-    default: './certs/public_key.der.test'
+    default: '/etc/pki/kernel/public/public_key.der'
     required: true
 runs:
   using: "composite"
