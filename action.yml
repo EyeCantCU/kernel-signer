@@ -19,4 +19,5 @@ runs:
     - name: Sign kernel
       shell: bash
       run: |
-        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} -w $PWD --privileged ${{ inputs.image }} ./sign-kernel.sh
+        CONTAINER_ID=$(podman run -d ${{ inputs.image }})
+        podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} -w $PWD $CONTAINER_ID ./sign-kernel.sh
