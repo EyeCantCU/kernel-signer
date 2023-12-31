@@ -81,6 +81,12 @@ jobs:
           extra-args: |
             --target=${{ matrix.image_name }}
 
+      # Test kernel signing
+      - name: Sign kernel
+        uses: ./
+        with:
+          image: ${{ steps.build_image.outputs.image }}
+
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
       - name: Lowercase Registry
@@ -88,12 +94,6 @@ jobs:
         uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ env.IMAGE_REGISTRY }}
-
-      # Test kernel signing
-      - name: Sign kernel
-        uses: ./
-        with:
-          image: ${{ steps.build_image.outputs.image }}
 
       # Push the image to GHCR (Image Registry)
       - name: Push To GHCR
@@ -116,7 +116,8 @@ jobs:
         uses: EyeCantCU/cosign-action/sign@v0.2.1
         if: github.event_name != 'pull_request'
         with:
-          container: ghcr.io/${{ github.repository_owner }}/${{ matrix.image_name }}
+          containers: ${{ matrix.image_name }}
+          registry: ghcr.io/${{ github.repository_owner }}
           registry-token: ${{ secrets.GITHUB_TOKEN }}
           signing-secret: ${{ secrets.SIGNING_SECRET }}
           tags: ${{ steps.push.outputs.digest }}
