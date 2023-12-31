@@ -19,6 +19,6 @@ runs:
     - name: Sign kernel
       shell: bash
       run: |
-        CONTAINER_ID=$(podman run --replace --name ${{ inputs.image }} -d ${{ inputs.image }})
+        CONTAINER_ID=$(podman run --replace --name ${{ inputs.image }} -dt ${{ inputs.image }})
         podman exec -e PRIVKEY=${{ inputs.privkey }} -e PUBKEY=${{ inputs.pubkey }} -w $PWD $CONTAINER_ID ./sign-kernel.sh
         buildah commit $CONTAINER_ID ${{ inputs.image }}
