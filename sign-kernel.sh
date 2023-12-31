@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -ouex pipefail
+
 kernel_version=""
 
 if command -v rpm-ostree; then
