@@ -6,16 +6,11 @@ kernel_version=""
 
 if command -v rpm-ostree; then
   if grep "kernel-surface" <<< $(rpm -qa); then
-    if grep -qv "kernel-surface-devel" <<< $(rpm -qa); then
-      rpm-ostree install kernel-surface-devel
-    fi
     kernel_version=$(rpm -qa | grep kernel-surface-[0-9] | sed 's/kernel-surface-//')
   else
-    if grep -qv "kernel-devel" <<< $(rpm -qa); then
-      rpm-ostree install kernel-devel
-    fi
     kernel_version=$(rpm -qa | grep kernel-[0-9] | sed 's/kernel-//')
   fi
+  rpm-ostree install sbsigntools openssl
 fi
 
 # Private key
@@ -49,9 +44,12 @@ else
 fi
 
 echo "Signing kernel..."
-cd /usr/src/kernels/$kernel_version/scripts
-./sign-file sha256 $PRIVKEY_PATH $PUBKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz
-./sign-file sha256 $PRIVKEY_PATH $PUBKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz-virt.efi
+
+CRT_PATH=$(echo $(dirname "$PUBKEY_PATH")/public_key.crt)
+
+openssl x509 -in $PUBKEY_PATH -out $CRT_PATH
+sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz
+sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz-virt.efi
 
 if command -v ostree; then
   rm -rf /tmp/* /var/*
