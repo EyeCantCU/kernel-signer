@@ -56,7 +56,6 @@ CRT_PATH=$(echo $(dirname "$PUBKEY_PATH")/public_key.crt)
 
 openssl x509 -in $PUBKEY_PATH -out $CRT_PATH
 sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz
-sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz-virt.efi
 
 if command -v ostree; then
   rm -rf /tmp/* /var/*
