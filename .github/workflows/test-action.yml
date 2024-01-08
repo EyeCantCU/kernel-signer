@@ -113,7 +113,7 @@ jobs:
             --disable-content-trust
 
       - name: Sign image
-        uses: EyeCantCU/cosign-action/sign@v0.2.1
+        uses: EyeCantCU/cosign-action/sign@v0.2.2
         if: github.event_name != 'pull_request'
         with:
           containers: ${{ matrix.image_name }}
