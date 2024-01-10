@@ -29,6 +29,5 @@ runs:
         for TAG in $TAGS; do
           buildah commit "$CONTAINER_ID" "${{ inputs.image }}":"$TAG"
         done
-        podman container list
       env:
         TAGS: ${{ inputs.tags }}
