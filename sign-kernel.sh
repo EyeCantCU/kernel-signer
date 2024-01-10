@@ -61,7 +61,7 @@ do
   echo "Found existing signature at signum $SIGNUM, removing..."
   sbattach --remove /usr/lib/modules/$kernel_version/vmlinuz
 done
-sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz
+sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz --output /usr/lib/modules/$kernel_version/vmlinuz
 
 if command -v ostree; then
   rm -rf /tmp/* /var/*
