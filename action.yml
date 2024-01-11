@@ -26,8 +26,10 @@ runs:
         CONTAINER_ID=$(podman run --entrypoint /bin/bash --replace --name "${{ inputs.image }}" -dt "${{ inputs.image }}")
         podman cp "${{ github.action_path }}"/sign-kernel.sh "${{ inputs.image }}":/tmp/sign-kernel.sh
         podman exec -e PRIVKEY="${{ inputs.privkey }}" -e PUBKEY="${{ inputs.pubkey }}" "${{ inputs.image }}" "/tmp/sign-kernel.sh"
+        buildah commit "$CONTAINER_ID" "${{ inputs.image }}"
         for TAG in $TAGS; do
-          buildah commit "$CONTAINER_ID" "${{ inputs.image }}":"$TAG"
+          echo "Tagging ${{ inputs.image }} with tag: $TAG"
+          buildah tag "${{ inputs.image }}" "${{ inputs.image }}":$TAG
         done
       env:
         TAGS: ${{ inputs.tags }}
