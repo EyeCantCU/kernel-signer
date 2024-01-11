@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.0...v0.1.1) (2024-01-11)
+
+
+### Bug Fixes
+
+* **action:** Set entrypoint to bash when retrieving container ID ([c6ce092](https://github.com/EyeCantCU/kernel-signer/commit/c6ce09237eae9bc59c76622c4f8b3189ade3b8aa))
+
+
+### Miscellaneous Chores
+
+* release v0.1.1 ([874b5c7](https://github.com/EyeCantCU/kernel-signer/commit/874b5c73915fce087a89bc01ce331ba99d6301af))
+
 ## 0.1.0 (2024-01-10)
 
 
