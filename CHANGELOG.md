@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.2](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.1...v0.1.2) (2024-01-11)
+
+
+### Bug Fixes
+
+* **action:** Tag image after it's been committed ([7f3cbf0](https://github.com/EyeCantCU/kernel-signer/commit/7f3cbf0995551633c8fe4eb3aa76958d0ae4b5bc))
+
+
+### Miscellaneous Chores
+
+* release v0.1.2 ([4c818f6](https://github.com/EyeCantCU/kernel-signer/commit/4c818f61524c8e5756f39872fe85de90c6db8d4d))
+
 ## [0.1.1](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.0...v0.1.1) (2024-01-11)
 
 
