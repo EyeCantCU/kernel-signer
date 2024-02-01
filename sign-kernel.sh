@@ -5,11 +5,7 @@ set -ouex pipefail
 kernel_version=""
 
 if command -v rpm; then
-  if grep "kernel-surface" <<< $(rpm -qa); then
-    kernel_version=$(rpm -qa | grep kernel-surface-[0-9] | sed 's/kernel-surface-//')
-  else
-    kernel_version=$(rpm -qa | grep kernel-[0-9] | sed 's/kernel-//')
-  fi
+  kernel_version=$(rpm -qa | grep -P 'kernel-(|surface-)(\d+\.\d+\.\d+)' | sed -E 's/kernel-(|surface-)//')
 fi
 
 if command -v rpm-ostree; then
