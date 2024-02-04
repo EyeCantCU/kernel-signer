@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.2...v0.1.3) (2024-02-04)
+
+
+### Features
+
+* **sign-kernel:** get kernel version using regex ([#8](https://github.com/EyeCantCU/kernel-signer/issues/8)) ([e88ca98](https://github.com/EyeCantCU/kernel-signer/commit/e88ca98f2f8453aef73aafe3827c873d47926d75))
+
+
+### Miscellaneous Chores
+
+* release v0.1.3 ([4a1bcd0](https://github.com/EyeCantCU/kernel-signer/commit/4a1bcd0e19ce56ece0f178e34c4079e771e62301))
+
 ## [0.1.2](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.1...v0.1.2) (2024-01-11)
 
 
