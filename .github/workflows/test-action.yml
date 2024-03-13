@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image_name: [kernel-signer-test]
+        image_name: [kernel-signer-test, kernel-signer-test-cachyos]
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
