@@ -52,12 +52,15 @@ echo "Signing kernel..."
 CRT_PATH=$(echo $(dirname "$PUBKEY_PATH")/public_key.crt)
 
 openssl x509 -in $PUBKEY_PATH -out $CRT_PATH
-EXISTING_SIGNATURES="$(sbverify --list /usr/lib/modules/$kernel_version/vmlinuz | grep '^signature \([0-9]\+\)$' | sed 's/^signature \([0-9]\+\)$/\1/')"
-for SIGNUM in $EXISTING_SIGNATURES
-do
-  echo "Found existing signature at signum $SIGNUM, removing..."
-  sbattach --remove /usr/lib/modules/$kernel_version/vmlinuz
-done
+EXISTING_SIGNATURES="$(sbverify --list /usr/lib/modules/$kernel_version/vmlinuz)"
+if [[ -n $EXISTING_SIGNATURES ]]; then
+  EXISTING_SIGNATURES="$(echo $EXISTING_SIGNATURES | grep '^signature \([0-9]\+\)$' | sed 's/^signature \([0-9]\+\)$/\1/')"
+  for SIGNUM in $EXISTING_SIGNATURES
+  do
+    echo "Found existing signature at signum $SIGNUM, removing..."
+    sbattach --remove /usr/lib/modules/$kernel_version/vmlinuz
+  done
+fi
 sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz --output /usr/lib/modules/$kernel_version/vmlinuz
 sbverify --list /usr/lib/modules/$kernel_version/vmlinuz
 
