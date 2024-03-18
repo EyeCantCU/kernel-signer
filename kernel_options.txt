@@ -1,5 +1,0 @@
-surface
-cachyos
-cachyos-lts
-cachyos-rt
-lqx

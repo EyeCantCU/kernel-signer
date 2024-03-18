@@ -3,10 +3,9 @@
 set -ouex pipefail
 
 kernel_version=""
-alt_kernels=$(sed 's/$/-/' /tmp/kernel_options.txt | paste -sd'|')
 
 if command -v rpm; then
-  kernel_version=$(rpm -qa | grep -P "kernel-(|$alt_kernels)(\d+\.\d+\.\d+)" | sed -E "s/kernel-(|$alt_kernels)//")
+  kernel_version=$(rpm -qa | grep -P 'kernel-(|$KERNEL_SUFFIX-)(\d+\.\d+\.\d+)' | sed -E 's/kernel-(|$KERNEL_SUFFIX-)//')
 fi
 
 if command -v rpm-ostree; then
