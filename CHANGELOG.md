@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.3...v0.2.0) (2024-03-18)
+
+
+### Features
+
+* **action:** Allow passing a custom kernel suffix ([5089a88](https://github.com/EyeCantCU/kernel-signer/commit/5089a889c17b3e842f4535313c7286260cf4ee9c))
+
 ## [0.1.3](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.2...v0.1.3) (2024-02-04)
 
 
