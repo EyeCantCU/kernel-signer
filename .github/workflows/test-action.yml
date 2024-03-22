@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image_name: [kernel-signer-test]
+        image_name: [kernel-signer-test, kernel-signer-test-surface]
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
@@ -81,10 +81,20 @@ jobs:
           extra-args: |
             --target=${{ matrix.image_name }}
 
-      # Test kernel signing
-      - name: Sign kernel
+      # Test signing default kernel
+      - name: Sign default kernel
+        if: matrix.image_name == 'kernel-signer-test'
         uses: ./
         with:
+          image: ${{ steps.build_image.outputs.image }}
+          tags: ${{ steps.generate-tags.outputs.alias_tags }}
+
+      # Test signing surface kernel
+      - name: Sign surface kernel
+        if: matrix.image_name == 'kernel-signer-test-surface'
+        uses: ./
+        with:
+          kernel_suffix: surface
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.generate-tags.outputs.alias_tags }}
 
