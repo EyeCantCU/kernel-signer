@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.3...v0.2.0) (2024-05-16)
+
+
+### Features
+
+* **action:** Allow passing a custom kernel suffix ([5089a88](https://github.com/EyeCantCU/kernel-signer/commit/5089a889c17b3e842f4535313c7286260cf4ee9c))
+
+
+### Bug Fixes
+
+* **action:** Use image basename as container name ([52eae3a](https://github.com/EyeCantCU/kernel-signer/commit/52eae3a2ee3a767436cb353be4fdfea15358aa69))
+* **sign-kernel:** Properly substitute kernel_suffix value ([#15](https://github.com/EyeCantCU/kernel-signer/issues/15)) ([e26229d](https://github.com/EyeCantCU/kernel-signer/commit/e26229dde649a43bd17eaacc1e768a15d7bf0fd1))
+
 ## [0.1.3](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.2...v0.1.3) (2024-02-04)
 
 
