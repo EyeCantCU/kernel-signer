@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.1](https://github.com/EyeCantCU/kernel-signer/compare/v0.2.0...v0.2.1) (2024-05-18)
+
+
+### Bug Fixes
+
+* **action:** Allow overriding default tag, default to latest ([888035b](https://github.com/EyeCantCU/kernel-signer/commit/888035b167e87d9a1c376a8fec1e8d71cd6a7826))
+* **action:** Attempt to pull image if unavailable ([c6cd4d5](https://github.com/EyeCantCU/kernel-signer/commit/c6cd4d543157750c5c87b14d65150eb1d8cf8ba5))
+* **action:** Only pull if missing from local storage ([4fa410e](https://github.com/EyeCantCU/kernel-signer/commit/4fa410ebb9f6188d5fa3647d5423a5db97c672c0))
+* **action:** Support passing repository, default to localhost ([6101f34](https://github.com/EyeCantCU/kernel-signer/commit/6101f347773ffdf20246a891aae56195140c38d0))
+
 ## [0.2.0](https://github.com/EyeCantCU/kernel-signer/compare/v0.1.3...v0.2.0) (2024-05-16)
 
 
