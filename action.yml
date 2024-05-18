@@ -2,9 +2,6 @@ name: 'Kernel Signer'
 author: 'EyeCantCU'
 description: 'Signs kernel in image via Podman'
 inputs:
-  image:
-    description: 'Image containing kernel'
-    required: true
   kernel_suffix:
     description: 'Allows passing a custom kernel suffix. Only use if kernel package name has been changed'
     required: false
@@ -16,6 +13,10 @@ inputs:
     description: 'Public key, path to public key, or URL to retrieve public key'
     default: '/etc/pki/kernel/public/public_key.der'
     required: true
+  repository:
+    description: 'Repository containing image'
+    default: 'localhost'
+    required: true
   tags:
     description: 'Tags used by container'
     default: 'latest'
@@ -26,7 +27,7 @@ runs:
     - name: Sign kernel
       shell: bash
       run: |
-        CONTAINER_ID=$(podman run --pull missing --entrypoint /bin/bash --replace --name $(basename "${{ inputs.image }}") -dt "${{ inputs.image }}")
+        CONTAINER_ID=$(podman run --pull missing --entrypoint /bin/bash --replace --name $(basename "${{ inputs.image }}") -dt "${{ inputs.repository }}/${{ inputs.image }}")
         podman cp "${{ github.action_path }}"/sign-kernel.sh $(basename "${{ inputs.image }}"):/tmp/sign-kernel.sh
         podman exec -e KERNEL_SUFFIX="${{ inputs.kernel_suffix }}" -e PRIVKEY="${{ inputs.privkey }}" -e PUBKEY="${{ inputs.pubkey }}" $(basename "${{ inputs.image }}") "/tmp/sign-kernel.sh"
         buildah commit "$CONTAINER_ID" "${{ inputs.image }}"
