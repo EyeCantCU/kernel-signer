@@ -25,6 +25,10 @@ inputs:
     description: 'Tags used by container'
     default: 'latest'
     required: true
+  strip:
+    description: 'Whether or not to strip existing secure boot keys from the kernel'
+    default: 'true'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -33,7 +37,7 @@ runs:
       run: |
         CONTAINER_ID=$(podman run --pull missing --entrypoint /bin/bash --replace --name $(basename "${{ inputs.image }}") -dt "${{ inputs.repository }}/${{ inputs.image }}:${{ inputs.default-tag }}")
         podman cp "${{ github.action_path }}"/sign-kernel.sh $(basename "${{ inputs.image }}"):/tmp/sign-kernel.sh
-        podman exec -e KERNEL_SUFFIX="${{ inputs.kernel_suffix }}" -e PRIVKEY="${{ inputs.privkey }}" -e PUBKEY="${{ inputs.pubkey }}" $(basename "${{ inputs.image }}") "/tmp/sign-kernel.sh"
+        podman exec -e KERNEL_SUFFIX="${{ inputs.kernel_suffix }}" -e PRIVKEY="${{ inputs.privkey }}" -e PUBKEY="${{ inputs.pubkey }}" -e STRIP="${{ inputs.strip }}" $(basename "${{ inputs.image }}") "/tmp/sign-kernel.sh"
         buildah commit "$CONTAINER_ID" "${{ inputs.image }}"
         for TAG in $TAGS; do
           echo "Tagging ${{ inputs.image }} with tag: $TAG"
