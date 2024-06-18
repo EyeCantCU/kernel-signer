@@ -2,6 +2,9 @@ name: 'Kernel Signer'
 author: 'EyeCantCU'
 description: 'Signs kernel in image via Podman'
 inputs:
+  image:
+    description: 'Image containing kernel'
+    required: true
   default-tag:
     description: 'Default tag used by container'
     default: 'latest'
