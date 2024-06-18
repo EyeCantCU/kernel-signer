@@ -5,7 +5,7 @@ inputs:
   image:
     description: 'Image containing kernel'
     required: true
-  default-tag:
+  default_tag:
     description: 'Default tag used by container'
     default: 'latest'
     required: true
