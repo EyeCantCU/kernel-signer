@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/EyeCantCU/kernel-signer/compare/v0.2.1...v0.3.0) (2024-06-18)
+
+
+### Features
+
+* **action:** Add option to disable stripping the kernel of keys before signing. ([#18](https://github.com/EyeCantCU/kernel-signer/issues/18)) ([1c9506d](https://github.com/EyeCantCU/kernel-signer/commit/1c9506dd7640d00f7669a52a05eae755a861c115))
+
+
+### Bug Fixes
+
+* **action:** Restore image input ([7e60f33](https://github.com/EyeCantCU/kernel-signer/commit/7e60f3396d1d20a18c85ae1c5b75b803ac533307))
+
 ## [0.2.1](https://github.com/EyeCantCU/kernel-signer/compare/v0.2.0...v0.2.1) (2024-05-18)
 
 
