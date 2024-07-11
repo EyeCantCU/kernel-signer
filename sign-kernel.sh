@@ -20,8 +20,7 @@ fi
 if [[ "${PRIVKEY}" == /* ]]; then
   PRIVKEY_PATH="${PRIVKEY}"
 else
-  PRIVKEY_PATH="/etc/pki/kernel/private/private_key.priv"
-  mkdir -p "$(dirname "$PRIVKEY_PATH")"
+  PRIVKEY_PATH="/tmp/private_key.priv"
   if [[ "${PRIVKEY}" == ./* ]]; then
     cp "${PRIVKEY}" "${PRIVKEY_PATH}"
   elif [[ "${PRIVKEY}" == http* ]]; then
@@ -62,6 +61,7 @@ if [[ "${STRIP}" == true ]]; then
   fi
 fi
 sbsign --cert $CRT_PATH --key $PRIVKEY_PATH /usr/lib/modules/$kernel_version/vmlinuz --output /usr/lib/modules/$kernel_version/vmlinuz
+rm -rf $PRIVKEY_PATH
 sbverify --list /usr/lib/modules/$kernel_version/vmlinuz
 
 if command -v ostree; then
